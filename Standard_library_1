@@ -1,0 +1,487 @@
+OS INTERFACE
+************
+
+---> os Module
+---> shutil Module
+
+os Module
+---------
+
+os.getcwd()-- to get the current working directory
+os.chdir()--- to change the directory from current directory to the specified directory.
+os.system()-- to run the commands given as arguements on system shell.
+
+eg:
+
+import os
+os.getcwd()                                    # displays the current working directory
+os.chdir('/python_notes/note1')                # changes the directory to /python_notes/note1 
+os.system('mkdir newfolder')                   # runs 'mkdir newfolder' on system shell thereby creating a new directory named newfolder in the                                              current working directory
+
+
+Do not import like 'from os import *' by doing this,the open() functions in the module and that of python may have conflicts.
+
+Some of the built in functions like dir() and help() helps while working with os module.
+
+dir(os) --------------displays all functions in os module as a list.
+help(os)-------------- displays a detailed manual of the functionalities of os module.
+
+shutil Module
+-------------
+when Frequent file or data management is needed, shutil module is used.it provides a better interface for data management.
+
+import shutil
+
+shutil.copyfile('a.txt','b.txt')                    #copies the contents of a.txt to b.txt.
+
+shutil.move('/home/killbox/child','parent')         #moves the folder child into the parent folder.
+
+
+
+FILE WILDCARDS
+**************
+
+glob Module
+-----------
+
+The glob module contains functions which displays the contents of the current working directory as lists in accordance to the expression specified in the glob.glob() call.
+
+
+import glob
+
+glob.glob('*.py')            # displays all the files with .py extension in the list format.
+
+
+
+
+COMMAND LINE ARGUEMENTS
+***********************
+
+sys module
+----------
+
+some of the python scripts written need to process the command line arguements.The command line arguements are stored in 'argv' attribute of the 'sys' module as lists.
+
+eg:
+
+Create a python file 'demo.py'
+
+import sys
+
+print(sys.argv)
+
+when the file demo.py is run on command line by giving it arguements,
+
+python3 demo.py one two three
+
+the output will be a list containing the arguements given on command line while running the .py file.
+
+['demo.py', 'one', 'two', 'three']      #result
+
+
+Error Output and Redirection
+----------------------------
+
+sys module also have attributes for stdin,stdout,stderr
+
+stderr attribute of sys module can be used to print warning messages.
+
+import sys
+
+sys.stderr.write('warning, file not found starting a new one')
+
+Exiting a Script
+----------------
+exit() function of sys module is the best way to terminate a script.
+
+sys.exit()
+
+
+String Pattern Matching
+***********************
+
+re module
+---------
+
+re module provides functions for string matching and manipulation.
+
+match()-------matches the pattern if it is at the beginning of the string else there will be no matching.
+syntax:
+import re
+if re.match(r"pattern","string"):
+   print("match found")
+else:
+   print("no match found")
+
+eg:
+import re
+pattern=r"spam"
+if re.match(pattern,"spamspamspam"):
+   print("match found")
+else:
+   print("no match found")
+
+if re.match(pattern,"dfgspamspamspam"):
+   print("match found")
+else:
+   print("no match found")
+
+
+res-->
+match found
+no match found
+
+search()------searches for the occurances of the pattern anywhere in the string unlike match().
+
+syntax:
+import re
+if re.search(r"pattern","string"):
+   print("match found")
+else:
+   print("no match found")
+
+eg:
+import re
+pattern=r"spam"
+if re.search(pattern,"spamspamspam"):
+   print("match found")
+else:
+   print("no match found")
+
+if re.match(pattern,"dfgspamspamspam"):
+   print("match found")
+else:
+   print("no match found")
+
+res-->
+match found
+match found
+
+findall()-----finds and returns list of all substrings which matches the pattern.
+
+syntax:
+import re
+re.findall(r"pattern","string"):
+
+eg:
+import re
+pattern=r"spam"
+print(re.findall(pattern,"spam is a spam created by a spammer"))
+
+res--->
+['spam','spam','spammer']
+
+sub()---------substitutes a particular pattern with the specified pattern in the string.
+
+Syntax:
+import re
+re.sub(pattern,repl,string,max)
+
+
+here pattern is the pattern to be replaced/substituted. 
+     repl is the pattern that replaces the matched items.
+     string is the content on which the operations are done.
+     max is number of items to be replaced in the string from the first match (optional). if not given, all the items will be replaced/substituted.
+
+eg:
+import re
+pattern=r'arjun'
+string1="arjun is the new student and arjun has secured fourth position"
+repl="santhosh"
+print(re.sub(pattern,repl,string1))
+
+res--->
+santhosh is the new student and santhosh has secured fourth position
+
+import re
+pattern=r'arjun'
+string1="arjun is the new student and arjun has secured fourth position"
+repl="santhosh"
+print(re.sub(pattern,repl,string1,1))
+
+res--->
+santhosh is the new student and arjun has secured fourth position
+
+import re
+pattern=r'arjun'
+string1="arjun is the new student and arjun has secured fourth position"
+repl="santhosh"
+print(re.sub(pattern,repl,string1,2))
+
+res--->
+santhosh is the new student and santhosh has secured fourth position
+
+
+MATH MODULE
+***********
+
+the math module provides functions for floating point math.
+
+math.cos
+math.pi
+math.log(num,base)   #where base is the base to which log of the number is taken.
+math.sqrt
+
+eg:
+import math
+print(math.cos(math.pi))
+print(math.sqrt(25))
+print(math.log(1024,2))
+
+
+res--->
+-1.0
+5.0
+10.0
+
+
+RANDOM MODULE
+*************
+
+The random module provides functions to make random selections.
+
+choice()----- The choice function of random module chooses a value in random from a list.
+Syntax:
+random.choice(list of values)
+
+sample()----- The sample function creates random sample values in a given range.
+Syntax:
+random.sample(range(value),number of random values to be retrieved)
+
+random()----- The random function displays a random floating point value.
+Syntax:
+random.random()
+
+randrange()-- The randrange function retrieves a random value in the given range.
+Syntax:
+random.randrange(value)      #where the random number is retrieved which is within the range of value.	
+
+
+eg:
+import random
+listt=['a','b','c','d']
+print(random.choice(listt))
+print(random.sample(range(100),20))
+print(random.random())
+print(random.randrange(6))
+
+res--->
+c
+[17, 16, 39, 92, 71, 41, 56, 81, 14, 2, 87, 67, 38, 36, 21, 84, 31, 85, 27, 6]
+0.7124460658303756
+5
+
+
+STATISTICS MODULE
+*****************
+
+The statistics module calculates basic  statistical properties:
+
+mean()--------- takes a list of values and calculates mean. 
+median()------- calculates median. 
+variance()----- calculates variance.
+
+eg:
+import statistics
+data=[45,56,85,12,74,52,23]
+print(statistics.mean(data))
+print(statistics.median(data))
+print(statistics.variance(data))
+
+res--->
+49.57142857142857
+52
+672.952380952381
+
+
+INTERNET ACCESS
+***************
+For handling internet access tasks, the two mainly used modules are:
+---> urllib.request
+---> smtplib
+
+urllib.request
+--------------
+
+eg:
+#for parsing urls on internet
+from urllib.request import urlopen
+with urlopen("http://www.openbookproject.net/py4fun/huffman/huffman.html") as response:
+   for line in response:
+      line=line.decode('utf-8')
+      if 'delimit' in line:
+         print(line)
+
+#for parsing html files in the system
+from urllib.request import urlopen
+with urlopen("file:///home/killbox/file1.html") as response:
+   for line in response:
+      line=line.decode('utf-8')
+      if 'delimit' in line:
+         print(line)
+
+
+res--->
+
+span.classifier-delimiter {
+
+<p>Since a unique path leads to each letter we don't need anything to delimit one character from another. We will be able to just run their bits together.</p>
+
+
+<p>Nov. 25, 09:43:32M EST delimit <p>
+
+
+smtplib
+-------
+to send mails
+
+eg:
+import smtplib
+server=smtplib.SMTP('localhost')
+server.sendmail('sender','receiver',"""content""")
+server.quit()
+ Note:this code runs only when there is a mail server running on localhost.
+
+
+DATES AND TIME
+**************
+datetime module provides functions to access  and manipulate date and time and it has features that are timezone aware.
+
+Date
+----
+
+from datetime import date
+now=date.today()
+print(now)
+#now formatting date as we see fit using strftime.
+print(now.strftime("%d-%m-%y.%D,%Y,%a,%A,%B,%b"))
+
+res--->
+
+2018-12-14
+14-12-18.12/14/18,2018,Fri,Friday,December,Dec
+
+
+date supports calender arithmetic:
+eg:
+
+from datetime import date
+now=date.today()
+birthday=date(1993,6,19)
+age=now-birthday
+print(age)
+
+res--->
+9309
+
+
+Time
+----
+import datetime
+now=datetime.datetime.now()
+print(now)
+#now formatting time as we see fit using strftime.
+now.strftime("%H:%M:%S")
+
+res--->
+
+2018-12-14 15:28:42.514442
+
+NOTE:
+datetime.datetime.now() returns date as date object
+datetime.date(2018,12,14)
+Using isoformat() to format the result, converts it to string.
+2018,12,14
+
+
+DATA COMPRESSION
+****************
+
+ZLIB MODULE
+-----------
+
+zlib module helps to compress data.
+
+main functions of zlib module are 
+zlib.compress()                   #compresses the file 
+zlib.decompress()                 #decompresses the file
+
+eg:
+
+import zlib
+string1=b'This is a message from the unknown world.The world which only you know about.So this message is for your eyes only.'
+print("length before compression:"+" "+str(len(string1)))
+t=zlib.compress(string1)
+print("length after compression:"+" "+str(len(t)))
+s=zlib.decompress(t)
+print("length after decompression:"+" "+str(len(s)))
+
+
+res--->
+length before compression: 115
+length after compression: 93
+length after decompression: 115
+
+
+PERFORMANCE MEASUREMENT
+***********************
+
+Peformance measurement is done using "timeit" module.It can be used to measure the time needed to run a code in many different ways.
+
+eg:Tuple packing and unpacking feature vs swapping with the help of 3 variables.
+ 
+from timeit import Timer
+print(timer('t=a;a=b;b=t','a=1;b=2').timeit())
+print(timer('a,b=b,a','a=1;b=2').timeit())
+ 
+QUALITY CONTROL
+***************
+
+Quality control is done by running tests on written code on the way for ensuring optimum performance of the code.two such ways are by using:
+
+DOCTEST MODULE
+-------------- 
+The doctest module provides tools to validate the tests given in the docstrings of a module.It makes the documentation more understandable by giving an example.
+
+eg:
+
+def average(values):
+    """Computes the arithmetic mean of a list of numbers.
+
+    >>> print(average([20, 30, 70]))
+    40.0
+    """
+    return sum(values) / len(values)
+
+import doctest
+print(doctest.testmod())   # automatically validate the embedded tests
+
+
+res--->
+
+TestResults(failed=0, attempted=1)
+
+
+UNITTEST MODULE
+---------------
+
+unittest module provides a more comprehensive set of tests and are written on a separate file.
+
+eg:
+
+import unittest
+
+def average(values):
+    return sum(values) / len(values)
+
+class TestStatisticalFunctions(unittest.TestCase):
+
+    def test_average(self):
+        self.assertEqual(average([20, 30, 70]), 40.0)
+        self.assertEqual(round(average([1, 5, 7]), 1), 4.3)
+        with self.assertRaises(ZeroDivisionError):
+            average([])
+        with self.assertRaises(TypeError):
+            average(20, 30, 70)
+
+unittest.main()
